@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shohail Parwej — Product Intern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0E14;
+    --surface: #12161F;
+    --surface-2: #171C27;
+    --line: #232A38;
+    --text: #E4E7EC;
+    --muted: #7C8494;
+    --accent: #C99A4A;
+    --accent-dim: #8A6E3C;
+    --signal: #5FA8D3;
+    --font-display: 'Newsreader', serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-body: 'IBM Plex Sans', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background: var(--accent); color: #0B0E14; }
+  a{ color: inherit; text-decoration:none; }
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(11,14,20,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
+  .nav-mark{ font-family: var(--font-mono); font-size: 14px; color: var(--accent); letter-spacing: 0.02em; }
+  .nav-links{ display:flex; gap: 28px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  .nav-links a{ transition: color .2s ease; }
+  .nav-links a:hover, .nav-links a:focus-visible{ color: var(--text); }
+
+  /* HERO / TERMINAL */
+  header.hero{ padding: 100px 0 80px; border-bottom: 1px solid var(--line); }
+  .terminal{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    overflow: hidden; box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px; padding: 10px 14px;
+    background: var(--surface-2); border-bottom: 1px solid var(--line);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; background:#3A4152; }
+  .terminal-title{ margin-left: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+  .terminal-body{ padding: 22px 24px 26px; font-family: var(--font-mono); font-size: 14px; color: #A9E5B8; min-height: 180px; }
+  .terminal-body .line{ margin-bottom: 6px; white-space: pre-wrap; }
+  .terminal-body .prompt{ color: var(--signal); }
+  .terminal-body .ok{ color: #7DDC91; }
+  .terminal-body .muted-line{ color: var(--muted); }
+  .cursor{
+    display:inline-block; width: 8px; height: 16px; background: var(--accent);
+    vertical-align: middle; animation: blink 1s step-start infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-name{
+    margin-top: 40px; font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(38px, 6vw, 60px); line-height: 1.05; letter-spacing: -0.01em;
+  }
+  .hero-role{ margin-top: 14px; font-size: 18px; color: var(--muted); max-width: 600px; }
+  .hero-role .hl{ color: var(--accent); }
+  .hero-meta{
+    margin-top: 24px; display:flex; gap:20px; flex-wrap:wrap;
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--muted);
+  }
+  .hero-meta span{ display:flex; align-items:center; gap:6px; }
+  .hero-meta .pip{ width:6px; height:6px; border-radius:50%; background: var(--signal); }
+
+  /* SECTIONS */
+  section{ padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow{
+    font-family: var(--font-mono); font-size: 12px; color: var(--accent);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  h2.section-title{
+    font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 3.4vw, 34px);
+    margin-bottom: 28px; max-width: 640px;
+  }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
+  .about-text p{ color: #C6CAD3; margin-bottom: 16px; max-width: 60ch; }
+  .about-text p:last-child{ margin-bottom:0; }
+  .stack-list{ font-family: var(--font-mono); font-size: 13px; }
+  .stack-group{ margin-bottom: 18px; }
+  .stack-group .label{ color: var(--muted); margin-bottom: 8px; }
+  .stack-group .items{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    border: 1px solid var(--line); background: var(--surface); padding: 4px 10px;
+    border-radius: 4px; color: var(--text); font-size: 12.5px;
+  }
+
+  /* WORK */
+  .work-item{
+    display:grid; grid-template-columns: 100px 1fr; gap: 24px;
+    padding: 26px 0; border-top: 1px solid var(--line);
+  }
+  .work-item:first-of-type{ border-top: none; }
+  .work-hash{ font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 4px; }
+  .work-hash .status{ display:block; margin-top: 6px; color: var(--accent); font-size: 11px; }
+  .work-body h3{ font-family: var(--font-display); font-weight: 500; font-size: 21px; margin-bottom: 8px; }
+  .work-body p{ color: var(--muted); max-width: 58ch; margin-bottom: 12px; }
+  .work-tags{ display:flex; flex-wrap:wrap; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; color: var(--signal); }
+  .work-tags span{ border: 1px solid var(--line); padding: 2px 8px; border-radius: 3px; }
+  .work-link{
+    display:inline-block; margin-top: 12px; font-family: var(--font-mono); font-size: 12.5px;
+    color: var(--accent); border-bottom: 1px solid var(--accent-dim); padding-bottom: 1px;
+  }
+  .work-link:hover{ color: var(--text); border-color: var(--text); }
+
+  /* EXPERIENCE LOG */
+  .log-item{ padding: 20px 0; border-top: 1px solid var(--line); }
+  .log-item:first-of-type{ border-top:none; }
+  .log-head{ display:flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .log-role{ font-family: var(--font-display); font-size: 18px; }
+  .log-org{ color: var(--accent); font-family: var(--font-mono); font-size: 12.5px; }
+  .log-date{ font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .log-desc{ color: var(--muted); margin-top: 8px; max-width: 62ch; font-size: 14.5px; }
+
+  /* CONTACT */
+  .contact-terminal{ font-family: var(--font-mono); font-size: 15px; }
+  .contact-terminal .line{ margin-bottom: 10px; }
+  .contact-terminal .prompt{ color: var(--signal); }
+  .contact-links{ margin-top: 24px; display:flex; gap: 24px; flex-wrap: wrap; }
+  .contact-links a{
+    font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+    border-bottom: 1px solid var(--accent-dim); padding-bottom: 2px;
+  }
+  .contact-links a:hover{ color: var(--text); border-color: var(--text); }
+
+  footer{
+    padding: 28px 0 60px; font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    display:flex; justify-content: space-between;
+  }
+
+  @media (max-width: 680px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .work-item{ grid-template-columns: 1fr; }
+    .work-hash{ display:flex; align-items:center; gap:10px; }
+    .work-hash .status{ margin-top:0; }
+    .nav-links{ gap:16px; }
+    .log-head{ flex-direction: column; gap: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation:none; opacity:1; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">shohail.dev</div>
+    <div class="nav-links">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="terminal-title">~/shohail — zsh</span>
+      </div>
+      <div class="terminal-body" id="termBody"></div>
+    </div>
+
+    <h1 class="hero-name">Shohail Parwej</h1>
+    <p class="hero-role">Aspiring Product Manager with an engineering background. I spot the manual, painful workflow, figure out what people actually need, and ship the tool that <span class="hl">fixes it — and gets adopted</span>.</p>
+    <div class="hero-meta">
+      <span><span class="pip"></span>Bengaluru, Karnataka, India</span>
+      <span>CSE grad · CGPA 7.72</span>
+      <span>github.com/shohail-DeV</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">01 — about</div>
+    <h2 class="section-title">I've spent my career so far finding the painful manual process nobody's fixed yet — and fixing it.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>My background is engineering, but the thread through everything I've built is the same one product work runs on: find where a process is slow, manual, or error-prone, understand who's affected and why it hasn't been fixed, then build and ship something that actually gets used. A stakeholder-facing Excel report replaced by a live dashboard. A quality-metrics email nobody read turned into a plain-language summary people act on.</p>
+        <p>Being close to the engineering side means I can scope realistically, talk to developers without a translator, and tell the difference between a hard technical constraint and an assumption nobody's questioned. My time in customer support has sharpened the other half — reading a user's actual problem instead of the ticket they filed, and communicating a fix in terms that land.</p>
+        <p>I've also formalized the analytical and process side: a Deloitte Australia data analytics job simulation, a JIRA project management certification, and hands-on Power BI and Excel work for stakeholder reporting.</p>
+      </div>
+      <div class="stack-list">
+        <div class="stack-group">
+          <div class="label">product & analysis</div>
+          <div class="items">
+            <span class="chip">Data Analysis</span><span class="chip">DAX</span><span class="chip">Power BI</span><span class="chip">Requirement Gathering</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="label">delivery & process</div>
+          <div class="items">
+            <span class="chip">JIRA</span><span class="chip">Stakeholder Reporting</span><span class="chip">Cross-functional Comms</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="label">technical fluency</div>
+          <div class="items">
+            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">REST APIs</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="label">shipped with</div>
+          <div class="items">
+            <span class="chip">Jenkins CI/CD</span><span class="chip">Docker/K8s</span><span class="chip">N8N</span><span class="chip">Gemini API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">02 — selected work</div>
+    <h2 class="section-title">A few problems I noticed, and what I did about them.</h2>
+
+    <div class="work-item">
+      <div class="work-hash">c9f2a1e<span class="status">● live</span></div>
+      <div class="work-body">
+        <h3>Build Matrix Report</h3>
+        <p><strong>Problem:</strong> stakeholders were tracking build and release status through a manually updated Excel sheet — slow, error-prone, and always a step behind. <strong>What I built:</strong> a browser-based tool that turns raw Jenkins build history into ready-to-share reports in minutes. <strong>Impact:</strong> faster, more accurate build-status communication, with zero manual upkeep.</p>
+        <div class="work-tags"><span>Jenkins</span><span>HTML</span></div>
+        <a class="work-link" href="https://github.com/shohail-DeV/BuildMatrix">view on github →</a>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-hash">7b41d0c<span class="status">● live</span></div>
+      <div class="work-body">
+        <h3>SonarQube Risk Report Automation</h3>
+        <p><strong>Problem:</strong> code-quality reports existed but nobody outside engineering read them — too dense, too technical. <strong>What I built:</strong> an N8N workflow that pulls the metrics, uses the Gemini API to rewrite them as plain-language, executive-ready recommendations, and emails them out automatically. <strong>Impact:</strong> non-technical stakeholders actually engage with code quality now, instead of ignoring a dashboard.</p>
+        <div class="work-tags"><span>N8N</span><span>Gemini API</span><span>SendGrid</span><span>Python</span></div>
+        <a class="work-link" href="https://github.com/shohail-DeV/Sonarqube-Report-Automation">view on github →</a>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-hash">e15c8a2<span class="status">● active</span></div>
+      <div class="work-body">
+        <h3>Infra Health Reporting Suite</h3>
+        <p><strong>Problem:</strong> infrastructure health was checked reactively — someone would notice a problem only after it caused one. <strong>What I built:</strong> Python and PowerShell monitors on top of the Kubernetes Dashboard API, generating multi-tab reports with automated Teams alerts. <strong>Impact:</strong> issues surface before they become incidents, not after.</p>
+        <div class="work-tags"><span>Python</span><span>Kubernetes API</span><span>PowerShell</span></div>
+        <a class="work-link" href="https://github.com/shohail-DeV/Infra-Health-Reporting-Suite">view on github →</a>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-hash">3af90d7<span class="status">○ archived</span></div>
+      <div class="work-body">
+        <h3>FastAPI Observability</h3>
+        <p><strong>Problem:</strong> a service that works most of the time still fails silently in the moments that matter. <strong>What I built:</strong> a fully instrumented FastAPI application exposing custom metrics through Prometheus and Grafana. <strong>Impact:</strong> the service reports on its own health instead of waiting for a user to report it first.</p>
+        <div class="work-tags"><span>Python</span><span>Prometheus</span><span>Grafana</span></div>
+        <a class="work-link" href="https://github.com/shohail-DeV/FastAPI-Observability">view on github →</a>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-hash">5d02f6b<span class="status">○ archived</span></div>
+      <div class="work-body">
+        <h3>Serverless Image Storage</h3>
+        <p><strong>Problem:</strong> needed image storage that scales with usage instead of paying for idle servers. <strong>What I built:</strong> a serverless storage service on AWS Lambda, provisioned with Terraform for repeatable, version-controlled infrastructure. <strong>Impact:</strong> zero idle cost, and infra that's defined in code, not clicked together by hand.</p>
+        <div class="work-tags"><span>AWS Lambda</span><span>Terraform</span><span>Python</span></div>
+        <a class="work-link" href="https://github.com/shohail-DeV/Serverless-ImageStorage">view on github →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">03 — experience</div>
+    <h2 class="section-title">Where I've worked, and what I was actually doing.</h2>
+
+    <div class="log-list">
+      <div class="log-item">
+        <div class="log-head">
+          <div><span class="log-role">Quality Analyst</span> · <span class="log-org">Alorica (Amazon process)</span></div>
+          <span class="log-date">Jul 2026 — Present</span>
+        </div>
+        <p class="log-desc">Monitoring customer interactions on a high-volume voice and chat process in a metrics-driven environment, tracking performance against SLA and quality benchmarks and flagging recurring issue patterns to team leads. Sitting this close to real user frustration daily — and having to trace it back to a root cause — is the closest thing to constant user research I've had.</p>
+      </div>
+
+      <div class="log-item">
+        <div class="log-head">
+          <div><span class="log-role">Associate DevOps Engineer</span> · <span class="log-org">CSM Technologies</span></div>
+          <span class="log-date">Sep 2025 — Jun 2026</span>
+        </div>
+        <p class="log-desc">Owned the gap between what engineering measured and what stakeholders understood — designing the N8N + Gemini automation that turned raw quality metrics into reports people actually read, and the Build Matrix tool that replaced a manual, spreadsheet-based reporting process across multiple production applications. Also maintained a daily incident-management workbook consolidating data from several sources into a standard format engineering teams relied on.</p>
+      </div>
+
+      <div class="log-item">
+        <div class="log-head">
+          <div><span class="log-role">Engineering Trainee</span> · <span class="log-org">CSM Technologies</span></div>
+          <span class="log-date">Sep 2025 — Dec 2025</span>
+        </div>
+        <p class="log-desc">Intensive Java full-stack program covering Core Java, Spring MVC/REST, Hibernate and JPA, and Spring Security — delivered an enterprise-style capstone combining REST, data, UI, and security layers.</p>
+      </div>
+
+      <div class="log-item">
+        <div class="log-head">
+          <div><span class="log-role">Undergraduate Intern, Core Shopping Experience</span> · <span class="log-org">Dell Technologies</span></div>
+          <span class="log-date">May 2024 — Jul 2024</span>
+        </div>
+        <p class="log-desc">Built a product validation tool for dell.com, working directly with engineering to define what "valid" meant and design a UI that surfaced failures clearly. Reduced manual configuration errors by an estimated 25% — a small feature with a measurable outcome.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">04 — contact</div>
+    <h2 class="section-title">Reach out.</h2>
+    <div class="contact-terminal">
+      <div class="line"><span class="prompt">$</span> curl shohail.dev/contact</div>
+      <div class="line">→ fastest response: email or LinkedIn.</div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:shohailparwej@gmail.com">shohailparwej@gmail.com</a>
+      <a href="https://github.com/shohail-DeV" target="_blank" rel="noopener">github.com/shohail-DeV</a>
+      <a href="https://www.linkedin.com/in/shohail-parwej" target="_blank" rel="noopener">linkedin.com/in/shohail-parwej</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Shohail Parwej</span>
+    <span>Bengaluru, India</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body = document.getElementById('termBody');
+  var lines = [
+    { text: '$ whoami', cls: 'prompt', delay: 0 },
+    { text: 'shohail-parwej', cls: 'ok', delay: 300 },
+    { text: '$ cat role.txt', cls: 'prompt', delay: 700 },
+    { text: 'product intern candidate — engineer by training', cls: '', delay: 1000 },
+    { text: '$ git log --oneline -1', cls: 'prompt', delay: 1500 },
+    { text: 'c9f2a1e shipped: build matrix report automation', cls: 'muted-line', delay: 1800 }
+  ];
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    body.innerHTML = lines.map(function(l){
+      var cls = l.cls ? ' ' + l.cls : '';
+      return '<div class="line' + cls + '">' + l.text + '</div>';
+    }).join('') + '<span class="cursor"></span>';
+  }
+
+  if(reduceMotion){ renderStatic(); return; }
+
+  var i = 0;
+  function next(){
+    if(i >= lines.length){
+      var cur = document.createElement('span');
+      cur.className = 'cursor';
+      body.appendChild(cur);
+      return;
+    }
+    var l = lines[i];
+    var div = document.createElement('div');
+    div.className = 'line' + (l.cls ? ' ' + l.cls : '');
+    div.textContent = l.text;
+    body.appendChild(div);
+    i++;
+    setTimeout(next, 260);
+  }
+  setTimeout(next, 200);
+})();
+</script>
+
+</body>
+</html>
